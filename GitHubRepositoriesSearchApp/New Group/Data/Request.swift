@@ -40,7 +40,7 @@ extension GitHubRequest{
         var urlRequest = URLRequest(url: url)
         urlRequest.url = components?.url
         urlRequest.httpMethod = method.rawValue
-        print("url",urlRequest.url)
+    
         
         return urlRequest
     }

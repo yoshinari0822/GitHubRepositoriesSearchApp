@@ -49,3 +49,11 @@ class GitHubAPI{
     
 }
 
+class SystemData:ObservableObject{
+    //スマホサイズ
+    @Published var widthOfPhone = UIScreen.main.bounds.width
+    @Published var heightOfPhone = UIScreen.main.bounds.height
+    
+    
+}
+
