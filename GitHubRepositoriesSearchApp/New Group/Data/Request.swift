@@ -25,6 +25,8 @@ extension GitHubRequest{
     
     
     func buildURLRequest() -> URLRequest{
+        
+        //urlの作成
         let url = baseURL.appendingPathComponent(path)
         var components = URLComponents(
             url: url, resolvingAgainstBaseURL: true
@@ -37,6 +39,7 @@ extension GitHubRequest{
             fatalError("Unsupported method \(method)")
         }
         
+        //urlRequestの作成
         var urlRequest = URLRequest(url: url)
         urlRequest.url = components?.url
         urlRequest.httpMethod = method.rawValue

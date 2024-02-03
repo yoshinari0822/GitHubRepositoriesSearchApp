@@ -45,8 +45,10 @@ class GitHubClient{
     
     func send<Request: GitHubRequest>(request: Request, completion: @escaping(Result<Request.Response, GitHubClientError>) -> Void){
         
+        //urlリクエストの作成
         let urlRequest = request.buildURLRequest()
         
+        //リクエストを送る
         httpClient.sendRequest(urlRequest){result in
             
             switch result{
