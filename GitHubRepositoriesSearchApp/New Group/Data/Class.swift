@@ -12,7 +12,6 @@ class GitHubAPI{
     struct SearchRepositories: GitHubRequest{
         let keyword: String
         
-        
         typealias Response = SearchResponse<Repository>
         
         var method: HTTPMethod{
