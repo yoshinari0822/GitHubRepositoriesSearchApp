@@ -18,7 +18,7 @@ struct SearchView: View {
     
     
     @State var searchWord: String = ""
-    @State var getRepositories:SearchResponse<Repository>? = nil
+    @State var getRepositories:SearchResponse<Repository> = SearchResponse(totalCount: 0, items: [])
     
     func searching(){
         
@@ -90,10 +90,7 @@ struct SearchView: View {
                     
                 case 2:
                     ScrollView{
-                        //getRepositoriesがnilでないことを確認
-                        if let repositories = getRepositories {
-                            ResultRow(repositories: repositories.items)
-                        }
+                        ResultRow(repositories: getRepositories.items)
                     }
                     
                 case 3:
