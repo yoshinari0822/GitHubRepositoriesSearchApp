@@ -49,8 +49,11 @@ struct SearchView: View {
         VStack{
             HStack{
                 TextField("検索ワードを入力", text: $searchWord, onCommit: {
-                    state = 1
-                    searching()
+                    //空白じゃなかったら検索かける
+                    if searchWord != ""{
+                        state = 1
+                        searching()
+                    }
                 })
                 .textFieldStyle(.roundedBorder)
                 .disabled(state != 1 ? false : true)
