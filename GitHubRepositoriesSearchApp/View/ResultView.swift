@@ -11,7 +11,8 @@ struct ResultRow: View{
     @ObservedObject var systemData = SystemData()
     var repositories:[Repository]
     
-    @State var urlStr = "https://qiita.com/nao_h/items/d3729382fc0f3157efc8"
+    
+    @State var getUrl:URL = URL(string:"https://api.github.com/")!
     @State var showSafariView = false
     
     var body: some View{
@@ -32,12 +33,14 @@ struct ResultRow: View{
                 ScrollView{
                     ForEach(repositories, id: \.self){ repository in
                         Button(action:{
-                            urlStr = repository.htmlUrl
                             
-                            if URL(string: urlStr) != nil {
-                                showSafariView = true
-                                print(URL(string: urlStr)!)
+                            //URLチェック
+                            guard let url = URL(string: repository.htmlUrl) else {
+                                print("有効でないURL")
+                                return
                             }
+                            getUrl = url
+                            showSafariView = true
                         }){
                             ResultCell(repository: repository)
                         }
@@ -45,13 +48,13 @@ struct ResultRow: View{
                 }
                 .foregroundStyle(.black)
                 .padding(.horizontal)
-            }
-        }.sheet(isPresented: $showSafariView){
-            SafariView(url: URL(string: urlStr)!)
-                .onAppear(){
-                    print(urlStr)
+                .sheet(isPresented: $showSafariView){
+                    
+                    SafariView(url: $getUrl)
                 }
+            }
         }
+        
     }
 }
 
